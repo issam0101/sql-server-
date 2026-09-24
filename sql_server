@@ -1,0 +1,157 @@
+use el_korb;
+create table Article (
+NumArt int primary key ,
+libell nvarchar (50),
+Stock int,
+Prixuinti int ,
+);
+create  table Fournissuers (
+NumFour int primary key ,
+Nom nvarchar (50),
+Adresse nvarchar (50),
+Ville nvarchar (50),
+) ;
+create table Acheter (
+NumFour int foreign key  references Fournissuers(NumFour),
+NumArt int foreign key references Article(NumArt),
+PrixAechte int ,
+DateAechet datetime,
+constraint pk_fe primary key(NumFour,NumArt),
+);
+INSERT INTO Article (NumArt,libell,Stock,Prixuinti)
+VALUES 
+(1,'Stylo',10,19),
+(2,'Cahier',25,28),
+(3,'Gomme',36,10),
+(4,'crayoun',19,2),
+(5,'Classeur',15,35),
+(6,'Regle',8,35),
+(7,'Feutre',0,15),
+(8,'Colle',22,7),
+(9,'Livre',5,40),
+(10,'Trousse',30,25);
+
+INSERT INTO Fournissuers (NumFour,Nom,Adresse,Ville)
+VALUES
+(10,'Alaoui','Narjis C','Fes'),
+(25,'Alemi','Ouafae','Fes'),
+(36,'Fadile','Assime','Fes'),
+(19,'Tijni','mahda','rabt'),
+(17,'khmlich','Azher','meknes'),
+(13,'bedaoui','rihla','tabger'),
+(21,'amrani','Atlas','Fes'),
+(22,'nouri','Center','rabat'),
+(23,'el fassi','Medina','Fes'),
+(24,'KARAIM','Hassan II','cas'),
+(27,'Saidi','AL QOds','rabat'),
+(26,'Rami','al amal','maknes');
+
+
+INSERT INTO Acheter (NumFour,NumArt,PrixAechte,DateAechet)
+VALUES 
+(10,1,12,'12-02-2013'),
+(25,2,13,'09-09-2012'),
+(36,3,19,'03-07-2012'),
+(19,4,18,'06-07-2012'),
+(17,3,22,'12-03-2011'),
+(13,2,65,'12-07-2012'),
+(21,2,20,'12-03-2012'),
+(22,5,30,'12-07-2012'),
+(22,1,15,'12-04-2012'),
+(24,2,14,'12-05-2012'),
+(26,1,17,'12-06-2012'),
+(27,2,25,'12-05-2012');
+
+
+alter table Article
+add Dateqrticle   DATETIME
+
+--alter table Fournissuers 
+--add Prenom nvarchar(50)
+
+--alter table Acheter 
+--add Duree datetime
+
+--select * from Acheter
+
+--ALTER TABLE Acheter
+--DROP COLUMN Duree
+
+
+
+
+
+select NumArt, libell
+from Article
+where stock >= 20;
+
+select *
+from Fournissuers
+where ville = 'fes';
+
+ 
+select * from Article
+where Prixuinti  between 2 and 19
+
+select * from Fournissuers
+where Nom like 'A%'
+
+
+select *
+from Fournissuers
+where ville  <> 'fes';
+
+
+select * from Article
+where libell like '%a%'
+
+
+select * from Article
+order by Prixuinti desc
+
+select * from Fournissuers
+order by Ville asc 
+
+select * from Acheter 
+where PrixAechte >= 22
+
+
+select * from Acheter
+order by DateAechet desc
+
+select Nom,PrixAechte from Fournissuers
+join Acheter
+on Fournissuers.NumFour = Acheter.NumFour
+
+select Nom,libell from Fournissuers
+join Acheter
+on Fournissuers.NumFour = Acheter.NumFour
+join Article
+on Article.NumArt = Acheter.NumArt
+
+select Nom,libell from Fournissuers
+join Acheter
+on Fournissuers.NumFour = Acheter.NumFour
+join Article
+on Article.NumArt = Acheter.NumArt
+
+select * from  Fournissuers
+join Acheter
+on Fournissuers.NumFour =  Acheter.NumFour
+where Nom = 'Alaoui'
+
+select *
+from Article
+join Acheter
+on Acheter.NumArt = Article.NumArt
+join.Fournissuers
+on Acheter.NumFour = Fournissuers.NumFour
+where Fournissuers.Ville = 'rabat'
+
+
+select  *
+from Article
+join Acheter
+on Acheter.NumArt = Article.NumArt
+where libell = 'stylo'
+
