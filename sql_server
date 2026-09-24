@@ -1,4 +1,4 @@
-use el_korb;
+use el_oasere;
 create table Article (
 NumArt int primary key ,
 libell nvarchar (50),
